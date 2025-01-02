@@ -13,7 +13,7 @@ export default function Pizza({
 }: PizzaProps): ReactElement {
   return (
     <div className="pizza">
-      <h2>{name}</h2>
+      <h1>{name}</h1>
       <ul>
         {Array.isArray(toppings) ? (
           toppings.map((item, index) => <li key={index}>{item}</li>)
