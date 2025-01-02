@@ -1,6 +1,6 @@
 import { ReactElement, useDebugValue } from "react";
-import usePizzaOfTheDay from "./usePizzaOfTheDay";
-import { getIntl } from "./utils/intlUtil";
+import usePizzaOfTheDay from "../hooks/usePizzaOfTheDay";
+import { getIntl } from "../utils/intlUtil";
 
 export default function PizzaOfTheDay(): ReactElement {
   const intl = getIntl();
