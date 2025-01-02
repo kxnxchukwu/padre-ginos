@@ -22,3 +22,16 @@ export type CartItem = {
 };
 
 export type CartItemType = CartItem[];
+
+export type CartContextType = [
+  CartItemType,
+  React.Dispatch<React.SetStateAction<CartItemType>>,
+];
+
+export type OrderResponse = {
+  order_id: string;
+  date: string;
+  time: string;
+};
+
+export type OrderResponseType = OrderResponse[];
