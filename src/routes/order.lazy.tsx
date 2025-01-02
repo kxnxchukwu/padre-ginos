@@ -6,9 +6,9 @@ import {
   useContext,
 } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import Pizza from "../Pizza";
+import Pizza from "../components/Pizza";
 import type { PizzaTypes, PizzaType, PizzaSizes } from "../../types";
-import Cart from "../Cart";
+import Cart from "../components/Cart";
 import { getIntl } from "../utils/intlUtil";
 import { CartContext } from "../contexts";
 

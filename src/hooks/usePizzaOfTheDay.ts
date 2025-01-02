@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PizzaType } from "../types";
+import { PizzaType } from "../../types";
 
 export default function usePizzaOfTheDay(): PizzaType | null {
   const [pizzaOfTheDay, setPizzaOfTheDay] = useState<PizzaType | null>(null);
