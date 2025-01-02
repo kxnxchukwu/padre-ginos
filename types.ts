@@ -35,3 +35,15 @@ export type OrderResponse = {
 };
 
 export type OrderResponseType = OrderResponse[];
+
+export type GetSingleOrderResponse = {
+  orderItems: {
+    pizzaTypeId: string;
+    name: string;
+    size: keyof PizzaSizes;
+    quantity: number;
+    price: number;
+    total: number;
+    image: string;
+  }[];
+};
