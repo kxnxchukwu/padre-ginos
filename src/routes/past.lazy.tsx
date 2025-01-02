@@ -4,8 +4,8 @@ import { ReactElement, useState } from "react";
 import getPastOrders from "../api/getPastOrders";
 import getPastOrder from "../api/getPastOrder";
 import { getIntl } from "../utils/intlUtil";
-import Modal from "../Modal";
-import ErrorBoundary from "../ErrorBoundary";
+import Modal from "../components/Modal";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoute,
