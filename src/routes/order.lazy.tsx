@@ -61,7 +61,6 @@ function Order(): ReactElement {
     event.preventDefault();
     const pizza = pizzaTypes.find((pizza) => pizza.id === pizzaType);
     if (pizza) {
-      console.log(" here");
       setCart([
         ...cart,
         {
@@ -77,7 +76,6 @@ function Order(): ReactElement {
     fetchPizzaTypes();
   }, []);
 
-  console.log(cart);
   return (
     <div className="order-page">
       <div className="order">
