@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import { CartItemType } from "../types";
-import { getIntl } from "./utils/intlUtil";
-import { sumCartItems } from "./utils/sumCartItems";
+import { CartItemType } from "../../types";
+import { getIntl } from "../utils/intlUtil";
+import { sumCartItems } from "../utils/sumCartItems";
 
 export interface CartProps {
   items: CartItemType;
