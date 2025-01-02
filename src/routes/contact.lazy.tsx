@@ -21,6 +21,17 @@ function ContactRoute(): ReactElement {
     },
   });
 
+  if (mutation.isError) {
+    return (
+      <>
+        <h2>Something went wrong. Please try again later.</h2>
+        <p>
+          Go back <Link to="/">/home</Link>
+        </p>
+      </>
+    );
+  }
+
   return (
     <div className="contact">
       <h2>Contact</h2>
