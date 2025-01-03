@@ -12,6 +12,7 @@ import type { PizzaTypes, PizzaType, PizzaSizes } from "../../types";
 import Cart from "../components/Cart";
 import { getIntl } from "../utils/intlUtil";
 import { CartContext } from "../contexts";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 type PizzaSize = keyof PizzaSizes;
 
@@ -38,7 +39,7 @@ function Order(): ReactElement {
   }
 
   async function fetchPizzaTypes(): Promise<void> {
-    const response = await fetch("/api/pizzas");
+    const response = await fetch(`${apiUrl}/api/pizzas`);
     const data = await response.json();
     setPizzaTypes(data);
     setLoading(false);
@@ -47,7 +48,7 @@ function Order(): ReactElement {
   async function checkout(): Promise<void> {
     setLoading(true);
 
-    await fetch("/api/order", {
+    await fetch(`${apiUrl}/api/order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
