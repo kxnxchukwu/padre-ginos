@@ -1,33 +1,57 @@
 import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, Suspense, use } from "react";
 import getPastOrders from "../api/getPastOrders";
 import getPastOrder from "../api/getPastOrder";
+import { OrderResponseType } from "../../types";
 import { getIntl } from "../utils/intlUtil";
 import Modal from "../components/Modal";
 import ErrorBoundary from "../components/ErrorBoundary";
+
+export interface PastOrderRouteProps {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  loadedPromise: Promise<OrderResponseType>;
+}
 
 export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoute,
 });
 
 function ErrorBoundaryWrappedPastOrderRoute(): ReactElement {
+  const [page, setPage] = useState(1);
+  const loadedPromise = useQuery({
+    queryKey: ["past-orders", page],
+    queryFn: () => getPastOrders(page),
+    staleTime: 600000,
+  }).promise;
   return (
     <ErrorBoundary>
-      <PastOrderRoute />
+      <Suspense
+        fallback={
+          <div className="past-orders">
+            <h2>Loading Past Orders...</h2>
+          </div>
+        }
+      >
+        <PastOrderRoute
+          loadedPromise={loadedPromise}
+          page={page}
+          setPage={setPage}
+        />
+      </Suspense>
     </ErrorBoundary>
   );
 }
 
-function PastOrderRoute(): ReactElement {
-  const [page, setPage] = useState(1);
+function PastOrderRoute({
+  loadedPromise,
+  page,
+  setPage,
+}: PastOrderRouteProps): ReactElement {
+  const data = use(loadedPromise);
   const intl = getIntl();
   const [focusedOrder, setFocusedOrder] = useState<string | null>(null);
-  const { isLoading, data } = useQuery({
-    queryKey: ["past-orders", page],
-    queryFn: () => getPastOrders(page),
-    staleTime: 600000,
-  });
 
   const { isLoading: isLoadingFocusedData, data: focusedOrderData } = useQuery({
     queryKey: ["past-order", focusedOrder],
@@ -35,14 +59,6 @@ function PastOrderRoute(): ReactElement {
     staleTime: 24 * 60 * 60 * 1000,
     enabled: !!focusedOrder,
   });
-
-  if (isLoading) {
-    return (
-      <div className="past-orders">
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
 
   return (
     <div className="past-orders">
@@ -74,7 +90,7 @@ function PastOrderRoute(): ReactElement {
         </button>
         <div>{page}</div>
         <button
-          disabled={!isLoading && data && data.length < 10}
+          disabled={data && data.length < 10}
           onClick={() => setPage(page + 1)}
         >
           Next
