@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Cart Component > should render the cart items 1`] = `
+<DocumentFragment>
+  <div
+    class="cart"
+  >
+    <h2>
+      Cart
+    </h2>
+    <ul>
+      <li>
+        <span
+          class="size"
+        >
+          M
+        </span>
+         - 
+        <span
+          class="type"
+        >
+          Pizza of the Day
+        </span>
+         - 
+        <span
+          class="price"
+        >
+          €12.25
+        </span>
+      </li>
+      <li>
+        <span
+          class="size"
+        >
+          S
+        </span>
+         - 
+        <span
+          class="type"
+        >
+          Veggie Pizza
+        </span>
+         - 
+        <span
+          class="price"
+        >
+          €10.15
+        </span>
+      </li>
+    </ul>
+    <p>
+      Total: €22.40
+    </p>
+    <button>
+      Checkout
+    </button>
+  </div>
+</DocumentFragment>
+`;
