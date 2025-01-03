@@ -4,6 +4,7 @@ import {
   useState,
   useEffect,
   useContext,
+  FormEvent,
 } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import Pizza from "../components/Pizza";
@@ -57,7 +58,7 @@ function Order(): ReactElement {
     setLoading(false);
   }
 
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const pizza = pizzaTypes.find((pizza) => pizza.id === pizzaType);
     if (pizza) {
