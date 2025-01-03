@@ -1,9 +1,9 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement, use } from "react";
 import { Link } from "@tanstack/react-router";
 import { CartContext } from "../contexts";
 
 export default function Header(): ReactElement {
-  const [cart] = useContext(CartContext);
+  const [cart] = use(CartContext);
   return (
     <nav>
       <Link to={"/"}>
@@ -11,7 +11,9 @@ export default function Header(): ReactElement {
       </Link>
       <div className="nav-cart">
         🛒
-        <span className="nav-cart-number">{cart.length}</span>
+        <span data-testid="cart-number" className="nav-cart-number">
+          {cart.length}
+        </span>
       </div>
     </nav>
   );
