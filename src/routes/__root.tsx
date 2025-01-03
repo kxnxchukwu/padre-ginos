@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -6,6 +6,18 @@ import PizzaOfTheDay from "../components/PizzaOfTheDay";
 import Header from "../components/Header";
 import { CartContext } from "../contexts";
 import { CartItemType } from "../../types";
+
+const DevTools = (): ReactElement | null => {
+  if (process.env.NODE_ENV === "development") {
+    return (
+      <>
+        <TanStackRouterDevtools />
+        <ReactQueryDevtools />
+      </>
+    );
+  }
+  return null;
+};
 
 export const Route = createRootRoute({
   component: () => {
@@ -19,8 +31,7 @@ export const Route = createRootRoute({
             <PizzaOfTheDay />
           </div>
         </CartContext.Provider>
-        <TanStackRouterDevtools />
-        <ReactQueryDevtools />
+        <DevTools />
       </>
     );
   },
